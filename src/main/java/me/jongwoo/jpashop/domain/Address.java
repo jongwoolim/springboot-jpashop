@@ -7,8 +7,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Embeddable;
 
-@Embeddable
-@Getter
+@Embeddable @Getter
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Address {
 
     private String city;
