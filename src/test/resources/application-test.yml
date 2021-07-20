@@ -1,9 +1,9 @@
 spring:
   datasource:
-    username: jongwoo
-    password: pass
-    url: jdbc:postgresql://localhost:5432/jpashop
-    driver-class-name: org.postgresql.Driver
+    username: sa
+    password:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
 
   h2:
     console:
@@ -12,9 +12,9 @@ spring:
   jpa:
     properties:
       hibernate:
-#        show_sql: true
+        #        show_sql: true
         format_sql: true
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+        dialect: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: create
 
