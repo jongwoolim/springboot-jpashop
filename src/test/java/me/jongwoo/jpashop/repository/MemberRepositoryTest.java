@@ -31,7 +31,7 @@ public class MemberRepositoryTest {
         //Given
         final String userName = "memberA";
         Member member = new Member();
-        member.setUsername(userName);
+        member.setName(userName);
 
         //When
         Long savedId = memberRepository.save(member);
@@ -39,7 +39,7 @@ public class MemberRepositoryTest {
         Member findMember = memberRepository.findById(savedId);
 
         assertThat(findMember.getId()).isEqualTo(member.getId());
-        assertThat(findMember.getUsername()).isEqualTo(member.getUsername());
+        assertThat(findMember.getName()).isEqualTo(member.getName());
         assertThat(findMember).isEqualTo(member);
 
     }
