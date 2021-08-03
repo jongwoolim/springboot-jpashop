@@ -55,6 +55,7 @@ public class OrderRepository {
                                         .innerJoin(order.member, member)
                                         .where(builder)
 //                                        .where(usernameEq(orderSearch.getMemberName()), orderStatusEq(orderSearch.getOrderStatus()))
+//                                        .where(allEq(orderSearch.getMemberName(), orderSearch.getOrderStatus()))
                                         .fetch();
         return result;
     }
@@ -65,6 +66,10 @@ public class OrderRepository {
 //
 //    private BooleanExpression orderStatusEq(OrderStatus orderStatusCond){
 //        return orderStatusCond != null ? order.orderStatus.eq(orderStatusCond) : null;
+//    }
+//
+//    private BooleanExpression allEq(String usernameCond, OrderStatus orderStatusCond){
+//        return usernameEq(usernameCond).and(orderStatusEq(orderStatusCond));
 //    }
 
     public List<Order> findAllByString(OrderSearch orderSearch){
