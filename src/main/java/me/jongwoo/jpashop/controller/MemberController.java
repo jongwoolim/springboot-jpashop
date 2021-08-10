@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -21,7 +22,16 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @GetMapping("members/new")
+    @GetMapping("/members")
+    public String list(Model model){
+        final List<Member> members = memberService.findMembers();
+
+        model.addAttribute("members", members);
+
+        return "members/memberList";
+    }
+
+    @GetMapping("/members/new")
     public String createForm(Model model){
         model.addAttribute("memberForm", new MemberForm());
 
