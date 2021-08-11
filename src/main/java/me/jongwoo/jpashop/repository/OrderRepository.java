@@ -4,8 +4,8 @@ import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
-import me.jongwoo.jpashop.domain.*;
 import me.jongwoo.jpashop.domain.Order;
+import me.jongwoo.jpashop.domain.*;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
@@ -41,32 +41,32 @@ public class OrderRepository {
 
         BooleanBuilder builder = new BooleanBuilder();
 
-        if(orderSearch.getOrderStatus() != null){
-            builder.and(order.orderStatus.eq(orderSearch.getOrderStatus()));
-        }
-
-        if(orderSearch.getMemberName() != null){
-            builder.and(member.name.eq(orderSearch.getMemberName()));
-        }
+//        if(orderSearch.getOrderStatus() != null){
+//            builder.and(order.orderStatus.eq(orderSearch.getOrderStatus()));
+//        }
+//
+//        if(orderSearch.getMemberName() != null){
+//            builder.and(member.name.eq(orderSearch.getMemberName()));
+//        }
 
         List<Order> result = jpaQueryFactory
                                         .select(order)
                                         .from(order)
                                         .innerJoin(order.member, member)
-                                        .where(builder)
-//                                        .where(usernameEq(orderSearch.getMemberName()), orderStatusEq(orderSearch.getOrderStatus()))
+//                                        .where(builder)
+                                        .where(usernameEq(orderSearch.getMemberName()), orderStatusEq(orderSearch.getOrderStatus()))
 //                                        .where(allEq(orderSearch.getMemberName(), orderSearch.getOrderStatus()))
                                         .fetch();
         return result;
     }
 
-//    private BooleanExpression usernameEq(String usernameCond){
-//        return usernameCond != null ? member.name.eq(usernameCond) : null;
-//    }
-//
-//    private BooleanExpression orderStatusEq(OrderStatus orderStatusCond){
-//        return orderStatusCond != null ? order.orderStatus.eq(orderStatusCond) : null;
-//    }
+    private BooleanExpression usernameEq(String usernameCond){
+        return StringUtils.hasText(usernameCond) ? member.name.eq(usernameCond) : null;
+    }
+
+    private BooleanExpression orderStatusEq(OrderStatus orderStatusCond){
+        return orderStatusCond != null ? order.orderStatus.eq(orderStatusCond) : null;
+    }
 //
 //    private BooleanExpression allEq(String usernameCond, OrderStatus orderStatusCond){
 //        return usernameEq(usernameCond).and(orderStatusEq(orderStatusCond));
